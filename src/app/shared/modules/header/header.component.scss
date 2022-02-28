@@ -1,0 +1,8 @@
+@use '../../../../theme/styles';
+
+.header {
+  width: 100%;
+  height: 40px;
+  background: styles.$primary;
+  color: white;
+}

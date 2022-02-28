@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-academy-2022';
+
+  alertClicked(result: string) {
+    console.log('clicked: ' + result);
+  }
 }

@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-center pt-4">
+  <div class="card p-4 counter-card">
+    <h1 class="text-center">Counter: {{ counter }}</h1>
+
+    <div class="d-flex justify-content-between">
+      <button (click)="increaseCounter()" class="btn btn-primary">Increase +</button>
+      <button (click)="decreaseCounter()" class="btn btn-secondary">Decrease -</button>
+
+      <div>
+        <input [(ngModel)]="counter" class="form-control"/>
+      </div>
+
+    </div>
+  </div>
+</div>
