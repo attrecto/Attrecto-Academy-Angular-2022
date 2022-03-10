@@ -1,5 +1,19 @@
-<div class="header">
-    <div>
-        Menu
-    </div>
-</div>
+<nav class="navbar p-2 header">
+  <div class="d-flex">
+    <a class="nav-link"
+       [routerLinkActive]="'active'"
+       [routerLink]="'/home'">
+      Home
+    </a>
+    <a class="nav-link"
+       [routerLinkActive]="'active'"
+       [routerLink]="'/users'">
+      Users
+    </a>
+    <a class="nav-link"
+       [routerLinkActive]="'active'"
+       [routerLink]="'/badges'">
+      Badges
+    </a>
+  </div>
+</nav>

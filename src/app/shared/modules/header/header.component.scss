@@ -1,8 +1,14 @@
-@use '../../../../theme/styles';
+@use "styles";
 
 .header {
-  width: 100%;
-  height: 40px;
   background: styles.$primary;
   color: white;
+
+  .nav-link {
+    color: white;
+
+    &.active {
+      border-bottom: 2px solid white;
+    }
+  }
 }
