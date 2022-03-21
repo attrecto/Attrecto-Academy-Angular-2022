@@ -22,6 +22,10 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['user-create']);
   }
 
+  navigateToEditUser(userId: number) {
+    this.router.navigate([`user-edit/${userId}`]);
+  }
+
   private getUsers() {
     this.userService.getUsers().subscribe({
       next: (users: User[]) => {

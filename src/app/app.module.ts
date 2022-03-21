@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { UsersModule } from './pages/users/users.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BadgesModule } from './pages/badges/badges.module';
+import { UserCreateModule } from './pages/user-create/user-create.module';
+import { UserEditModule } from './pages/user-edit/user-edit.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { BadgesModule } from './pages/badges/badges.module';
     HeaderModule,
     HomeModule,
     UsersModule,
+    UserCreateModule,
+    UserEditModule,
     BadgesModule,
     AppRoutingModule,
     RouterModule,
