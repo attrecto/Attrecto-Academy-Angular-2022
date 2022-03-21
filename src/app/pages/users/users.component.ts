@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
 import { User } from './classes/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -10,11 +11,15 @@ import { User } from './classes/user';
 export class UsersComponent implements OnInit {
   users: User[];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.getUsers();
+  }
+
+  navigateToCreateUser() {
+    this.router.navigate(['user-create']);
   }
 
   private getUsers() {

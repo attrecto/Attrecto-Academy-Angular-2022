@@ -21,7 +21,7 @@ import { BadgesModule } from './pages/badges/badges.module';
     BadgesModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

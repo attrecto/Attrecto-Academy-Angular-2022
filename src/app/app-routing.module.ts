@@ -4,10 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { UsersComponent } from './pages/users/users.component';
 import { BadgesComponent } from './pages/badges/badges.component';
+import { UserCreateComponent } from './pages/user-create/user-create.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'users', component: UsersComponent },
+  { path: 'user-create', component: UserCreateComponent },
   { path: 'badges', component: BadgesComponent },
   { path: '**', redirectTo: 'home' },
 ];
