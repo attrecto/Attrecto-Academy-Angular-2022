@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../pages/users/services/user.service';
 import { User } from '../../../pages/users/classes/user';
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
+  @Input() user: User;
+
   userForm: FormGroup;
 
   constructor(
@@ -26,17 +28,29 @@ export class UserFormComponent implements OnInit {
   saveForm() {
     const userFormValue: User = this.userForm.getRawValue();
 
-    this.userService.createUser(userFormValue).subscribe({
-      next: () => {
-        this.router.navigate(['users']);
-      }
-    })
+    if (this.isCreateMode) {
+      this.userService.createUser(userFormValue).subscribe({
+        next: () => {
+          this.router.navigate(['users']);
+        }
+      })
+    } else {
+      this.userService.editUser(userFormValue, this.user.id).subscribe({
+        next: () => {
+          this.router.navigate(['users']);
+        }
+      })
+    }
   }
 
   private initForm() {
     this.userForm = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.min(3)]],
-      image: [null, [Validators.required, Validators.min(3)]]
+      name: [this.user?.name, [Validators.required, Validators.min(3)]],
+      image: [this.user?.image, [Validators.required, Validators.min(3)]]
     });
+  }
+
+  get isCreateMode(): boolean {
+    return !this.user;
   }
 }
