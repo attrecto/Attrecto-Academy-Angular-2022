@@ -16,8 +16,8 @@ export class UserService {
     return this.httpClient.get<User>(environment.apiUrl + '/users/' + userId);
   }
 
-  getUsers(): Observable<any> {
-    return this.httpClient.get(environment.apiUrl + '/users');
+  getUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(environment.apiUrl + '/users');
   }
 
   createUser(user: User): Observable<any> {
