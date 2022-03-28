@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { UserService } from '../../../pages/users/services/user.service';
 import { User } from '../../../pages/users/classes/user';
 import { Router } from '@angular/router';
@@ -25,6 +25,10 @@ export class UserFormComponent implements OnInit {
     this.initForm();
   }
 
+  goBack() {
+    this.router.navigate(['users']);
+  }
+
   saveForm() {
     const userFormValue: User = this.userForm.getRawValue();
 
@@ -43,10 +47,40 @@ export class UserFormComponent implements OnInit {
     }
   }
 
+  getControl(name: string): AbstractControl {
+    return this.userForm.get(name);
+  }
+
+  isControlRequired(name: string): boolean {
+    return this.getControl(name).hasValidator(Validators.required);
+  }
+
+  isControlRequiredAndTouched(name: string): boolean {
+    const formControl = this.getControl(name);
+    const isRequired = formControl.hasValidator(Validators.required);
+    const isTouched = formControl.touched;
+
+    return isRequired && isTouched;
+  }
+
+  isControlInvalid(name: string): boolean {
+    return this.getControl(name).invalid;
+  }
+
+  hasError(controlName: string, errorCode: string): boolean {
+    return this.getControl(controlName).hasError(errorCode);
+  }
+
   private initForm() {
     this.userForm = this.formBuilder.group({
-      name: [this.user?.name, [Validators.required, Validators.min(3)]],
-      image: [this.user?.image, [Validators.required, Validators.min(3)]]
+      name: [
+        this.user?.name, [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(8)
+        ]
+      ],
+      image: [this.user?.image, [Validators.required, Validators.minLength(3)]]
     });
   }
 

@@ -1,23 +1,41 @@
-<form *ngIf="userForm" [formGroup]="userForm">
+<form *ngIf="userForm" [formGroup]="userForm" class="p-2">
   <div class="mb-3">
-    <label class="form-label">Name</label>
+    <label class="form-label">
+      Name <span *ngIf="isControlRequired('name')">*</span>
+    </label>
     <div>
       <input formControlName="name" class="form-control" name="name">
+    </div>
+    <div *ngIf="isControlInvalid('name')">
+      <div *ngIf="isControlRequiredAndTouched('name')">
+        Az érték kötelező
+      </div>
+      <div *ngIf="hasError('name', 'minlength')">
+        A beírt szöveg túl rövid
+      </div>
+      <div *ngIf="hasError('name', 'maxlength')">
+        A beírt szöveg túl hosszú
+      </div>
     </div>
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Avatar url</label>
+    <label class="form-label">
+      Avatar url <span *ngIf="isControlRequired('image')">*</span>
+    </label>
     <div>
       <input formControlName="image" class="form-control" name="image"/>
     </div>
   </div>
 
   <div class="mb-3">
-    <button class="btn btn-secondary me-2">
+    <button (click)="goBack()" class="btn btn-secondary me-2">
       Back
     </button>
-    <button (click)="saveForm()" class="btn btn-primary">
+    <button
+      [disabled]="userForm.invalid"
+      (click)="saveForm()"
+      class="btn btn-primary">
       Save
     </button>
   </div>

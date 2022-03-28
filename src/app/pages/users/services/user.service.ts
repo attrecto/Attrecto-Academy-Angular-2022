@@ -24,6 +24,10 @@ export class UserService {
     return this.httpClient.post(environment.apiUrl + '/users', user);
   }
 
+  removeUser(userId: number): Observable<any> {
+    return this.httpClient.delete(environment.apiUrl + '/users/' + userId);
+  }
+
   editUser(user: User, userId: number): Observable<User> {
     return this.httpClient.patch<User>(environment.apiUrl + '/users/' + userId, user);
   }

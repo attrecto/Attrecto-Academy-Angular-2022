@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../../classes/user';
 
 @Component({
@@ -8,11 +8,18 @@ import { User } from '../../classes/user';
 })
 export class UserCardComponent implements OnInit {
   @Input() user: User;
+  @Output() removeBtnClicked: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  emitRemoveBtnClick(event: Event) {
+    event.stopPropagation();
+
+    this.removeBtnClicked.emit();
   }
 
 }

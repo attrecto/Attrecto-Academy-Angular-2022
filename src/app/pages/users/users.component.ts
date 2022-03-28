@@ -26,6 +26,14 @@ export class UsersComponent implements OnInit {
     this.router.navigate([`user-edit/${userId}`]);
   }
 
+  removeUser(user: User) {
+    this.userService.removeUser(user.id).subscribe({
+      next: () => {
+        this.getUsers();
+      }
+    });
+  }
+
   private getUsers() {
     this.userService.getUsers().subscribe({
       next: (users: User[]) => {

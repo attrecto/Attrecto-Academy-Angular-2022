@@ -9,7 +9,9 @@
     <div *ngFor="let user of users" class="col-4">
       <app-user-card
         (click)="navigateToEditUser(user.id)"
-        [user]="user">
+        [user]="user"
+        (removeBtnClicked)="removeUser(user)"
+      >
       </app-user-card>
     </div>
   </div>

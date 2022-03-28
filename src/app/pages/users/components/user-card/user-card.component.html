@@ -1,8 +1,15 @@
-<div class="card">
+<div class="card position-relative">
   <div class="user-image position-relative">
     <img [src]="user.image" class="w-100" alt="user-avatar">
   </div>
   <div class="user-title p-3">
     <h5>{{user.name}}</h5>
+  </div>
+  <div class="user-card-remove-btn">
+    <button
+      (click)="emitRemoveBtnClick($event)"
+      class="btn btn-primary">
+      X
+    </button>
   </div>
 </div>
