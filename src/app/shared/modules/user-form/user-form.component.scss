@@ -1,0 +1,11 @@
+.user-form-badge {
+  color: #212529;
+  background-color: lightblue;
+  cursor: pointer;
+  margin: 2px;
+
+  &.selected {
+    color: #fff;
+    background-color: #28a745;
+  }
+}

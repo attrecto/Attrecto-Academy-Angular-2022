@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
 import { User } from './classes/user';
 import { Router } from '@angular/router';
+import { Badge } from '../badges/classes/Badge';
+import { BadgeService } from '../badges/services/badge.service';
 
 @Component({
   selector: 'app-users',
@@ -10,12 +12,18 @@ import { Router } from '@angular/router';
 })
 export class UsersComponent implements OnInit {
   users: User[];
+  badges: Badge[];
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(
+    private userService: UserService,
+    private badgeService: BadgeService,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
     this.getUsers();
+    this.getBadges();
   }
 
   navigateToCreateUser() {
@@ -38,6 +46,14 @@ export class UsersComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: (users: User[]) => {
         this.users = users;
+      }
+    });
+  }
+
+  private getBadges() {
+    this.badgeService.getBadges().subscribe({
+      next: (badges: Badge[]) => {
+        this.badges = badges;
       }
     });
   }

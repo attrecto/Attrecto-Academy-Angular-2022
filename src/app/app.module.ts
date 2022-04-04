@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BadgesModule } from './pages/badges/badges.module';
 import { UserCreateModule } from './pages/user-create/user-create.module';
 import { UserEditModule } from './pages/user-edit/user-edit.module';
+import { LoginModule } from './pages/login/login.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UserEditModule } from './pages/user-edit/user-edit.module';
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

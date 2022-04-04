@@ -1,10 +1,18 @@
-<div class="card position-relative">
+<div *ngIf="badges" class="card position-relative">
+
+  <div class="d-flex flex-wrap position-absolute top-0 start-0 w-100 user-badges">
+    <div *ngFor="let badge of user.badges" class="badge-image">
+      <img class="w-100" [src]="getBadgeImage(badge)" alt="badge image">
+    </div>
+  </div>
+
   <div class="user-image position-relative">
     <img [src]="user.image" class="w-100" alt="user-avatar">
   </div>
   <div class="user-title p-3">
     <h5>{{user.name}}</h5>
   </div>
+
   <div class="user-card-remove-btn">
     <button
       (click)="emitRemoveBtnClick($event)"

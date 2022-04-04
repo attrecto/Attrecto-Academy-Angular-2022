@@ -3,6 +3,7 @@
 .header {
   background: styles.$primary;
   color: white;
+  position: relative;
 
   .nav-link {
     color: white;
@@ -10,5 +11,13 @@
     &.active {
       border-bottom: 2px solid white;
     }
+  }
+
+  .logout-btn {
+    position: absolute;
+    z-index: 1;
+
+    right: 5px;
+    top: 10px;
   }
 }

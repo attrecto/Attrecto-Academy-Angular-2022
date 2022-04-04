@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { UserService } from '../../../pages/users/services/user.service';
 import { User } from '../../../pages/users/classes/user';
 import { Router } from '@angular/router';
+import { BadgeService } from '../../../pages/badges/services/badge.service';
+import { Badge } from '../../../pages/badges/classes/Badge';
 
 @Component({
   selector: 'app-user-form',
@@ -13,16 +15,48 @@ export class UserFormComponent implements OnInit {
   @Input() user: User;
 
   userForm: FormGroup;
+  badges: Badge[];
+
+  selectedBadges: { [key: string]: boolean } = {};
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private badgeService: BadgeService,
     private router: Router
   ) {
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.getBadges();
+    this.initSelectedBadges();
+  }
+
+  initSelectedBadges() {
+    if (this.user && this.user.badges) {
+      for (const badge of this.user.badges) {
+        this.selectedBadges[badge.id] = true;
+      }
+    }
+  }
+
+  isBadgeSelected(badgeId: number): boolean {
+    return !!this.selectedBadges[badgeId.toString()];
+  }
+
+  toggleSelectedBadge(badgeId: number): void {
+    const badgeIdStr = badgeId.toString();
+
+    this.selectedBadges[badgeIdStr] = !this.selectedBadges[badgeIdStr];
+  }
+
+  mapSelectedBadges() {
+    return Object.keys(this.selectedBadges).filter((key: string) => {
+      return this.selectedBadges[key] === true;
+    }).map((key: string) => {
+      return { id: parseInt(key) };
+    });
   }
 
   goBack() {
@@ -31,6 +65,7 @@ export class UserFormComponent implements OnInit {
 
   saveForm() {
     const userFormValue: User = this.userForm.getRawValue();
+    userFormValue.badges = this.mapSelectedBadges();
 
     if (this.isCreateMode) {
       this.userService.createUser(userFormValue).subscribe({
@@ -86,5 +121,13 @@ export class UserFormComponent implements OnInit {
 
   get isCreateMode(): boolean {
     return !this.user;
+  }
+
+  private getBadges() {
+    this.badgeService.getBadges().subscribe({
+      next: (badges: Badge[]) => {
+        this.badges = badges;
+      }
+    });
   }
 }
