@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, FormControl, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { UserService } from '../../../pages/users/services/user.service';
 import { User } from '../../../pages/users/classes/user';
 import { Router } from '@angular/router';
@@ -14,13 +14,13 @@ import { Badge } from '../../../pages/badges/classes/Badge';
 export class UserFormComponent implements OnInit {
   @Input() user: User;
 
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   badges: Badge[];
 
   selectedBadges: { [key: string]: boolean } = {};
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     private badgeService: BadgeService,
     private router: Router
